@@ -1,0 +1,17 @@
+﻿  LINK : bin\aurora_debug.exe não encontrado ou não compilado pelo o último link incremental; executando link completo
+     Criando biblioteca bin\aurora_debug.lib e objeto bin\aurora_debug.exp
+  aurora.vcxproj -> C:\Users\Ositio\Documents\of_v0.10.1_vs2017_release\apps\myApps\aurora\aurora\bin\aurora_debug.exe
+  
+  	                   2	C:\Users\Ositio\Documents\of_v0.10.1_vs2017_release\libs\fmodex\lib\vs\x64\
+  	  *Arquivo EXTRA		 1266176	C:\Users\Ositio\Documents\of_v0.10.1_vs2017_release\apps\myApps\aurora\aurora\bin\fmodex.dll
+  	  *Arquivo EXTRA		 1312768	C:\Users\Ositio\Documents\of_v0.10.1_vs2017_release\apps\myApps\aurora\aurora\bin\fmodexL.dll
+  	  *Arquivo EXTRA		 6942208	C:\Users\Ositio\Documents\of_v0.10.1_vs2017_release\apps\myApps\aurora\aurora\bin\FreeImage.dll
+  	   Mais Antigo		 1503232	C:\Users\Ositio\Documents\of_v0.10.1_vs2017_release\libs\fmodex\lib\vs\x64\fmodex64.dll
+  	   Mais Antigo		 1552384	C:\Users\Ositio\Documents\of_v0.10.1_vs2017_release\libs\fmodex\lib\vs\x64\fmodexL64.dll
+  
+  	                   1	C:\Users\Ositio\Documents\of_v0.10.1_vs2017_release\libs\FreeImage\lib\vs\x64\
+  	  *Arquivo EXTRA		 1266176	C:\Users\Ositio\Documents\of_v0.10.1_vs2017_release\apps\myApps\aurora\aurora\bin\fmodex.dll
+  	  *Arquivo EXTRA		 1503232	C:\Users\Ositio\Documents\of_v0.10.1_vs2017_release\apps\myApps\aurora\aurora\bin\fmodex64.dll
+  	  *Arquivo EXTRA		 1312768	C:\Users\Ositio\Documents\of_v0.10.1_vs2017_release\apps\myApps\aurora\aurora\bin\fmodexL.dll
+  	  *Arquivo EXTRA		 1552384	C:\Users\Ositio\Documents\of_v0.10.1_vs2017_release\apps\myApps\aurora\aurora\bin\fmodexL64.dll
+  	   Mais Antigo		 6942208	C:\Users\Ositio\Documents\of_v0.10.1_vs2017_release\libs\FreeImage\lib\vs\x64\FreeImage.dll
