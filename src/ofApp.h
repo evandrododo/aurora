@@ -30,7 +30,6 @@ public:
 	ftMouseFlow				velocityMouseFlow;
 	ftParticleFlow			particleFlow;
 	
-	ofImage					flowToolsLogo;
 	
 	ofParameterGroup		visualizationParameters;
 	ofParameter<int>		visualizationMode;

@@ -37,9 +37,6 @@ void ofApp::setup(){
 	mouseFlows.push_back(&densityMouseFlow);
 	mouseFlows.push_back(&velocityMouseFlow);
 	
-	flowToolsLogo.load("flowtools.png");
-	fluidFlow.addObstacle(flowToolsLogo.getTexture());
-	particleFlow.addObstacle(flowToolsLogo.getTexture());
 	
 	simpleCam.setup(densityWidth, densityHeight, true);
 	cameraFbo.allocate(densityWidth, densityHeight);
@@ -228,10 +225,6 @@ void ofApp::draw(){
                             fluidFlow.draw(0, 0, windowWidth, windowHeight); break;
 		default: break;
 	}
-	if (toggleParticleDraw) {
-		ofEnableBlendMode(OF_BLENDMODE_ADD);
-		particleFlow.draw(0, 0, windowWidth, windowHeight);
-	}
 	
 	if (toggleMouseDraw) {
 		ofEnableBlendMode(OF_BLENDMODE_ALPHA);
@@ -240,7 +233,6 @@ void ofApp::draw(){
 	}
 	
 	ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
-	flowToolsLogo.draw(0, 0, windowWidth, windowHeight);
 	
 	if (toggleGuiDraw) {
 		ofEnableBlendMode(OF_BLENDMODE_ALPHA);
@@ -248,16 +240,26 @@ void ofApp::draw(){
 	}
 	
 	ofPopStyle();
-*/
 
+*/
+	//if (toggleParticleDraw) {
+
+	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 	fboAurora.begin();
-		fluidFlow.drawVelocity(0, 0, windowWidth, windowHeight);
-		frame.draw(0,0,1366,768);
+	fluidFlow.drawVelocity(0, 0, windowWidth, windowHeight);
+	// ofEnableBlendMode(OF_BLENDMODE_ADD);
+	fluidFlow.drawBuoyancy(0, 0, windowWidth, windowHeight);
+	// densityBridgeFlow.draw(0, 0, windowWidth, windowHeight);
+	// frame.draw(0, 0, windowWidth, windowHeight);
 	fboAurora.end();
+
+	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 	shaderBrisa.begin();
-	ofSetColor(255,255,255,255);
-	fboAurora.draw(0,0);
+	shaderBrisa.setUniform1f("iTime", ofGetElapsedTimef());
+	ofSetColor(255, 255, 255, 255);
+	fboAurora.draw(0, 0, windowWidth, windowHeight);
 	shaderBrisa.end();
+	//}
 
 }
 
@@ -316,7 +318,6 @@ void ofApp::keyPressed(int key){
 void ofApp::toggleResetListener(bool& _value) {
 	if (_value) {
 		for (auto flow : flows) { flow->reset(); }
-		fluidFlow.addObstacle(flowToolsLogo.getTexture());
 	}
 	_value = false;
 }
