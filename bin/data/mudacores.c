@@ -149,11 +149,13 @@ float perlin(vec2 p, float dim) {
 void main(){
   // Paleta de cores: aurora boreal
   
-  // Rosa:        242  53  141
-  // Azul escuro    2  40  115
-  // Azul           3  76  140
-  // Verde musgo    3 140  101 
-  // Verde          3 166   28 
+  // Rosa:        242   53  141
+  // 			  .94  .21  .55
+  // Azul escuro    2   40  115
+  // Azul           3   76  140
+  // Verde musgo    3  140  101 
+  // Verde          3  166   28 
+  //               .01 .65  .11
 
 
 
@@ -165,10 +167,17 @@ void main(){
   vec4 color;
 
   color = color0;  
-/*
-  if(color.r > 0.1 && color.g > 0.1 && color.b > 0.1) {
-      color = vec4(color.r/2,color.g,color.b,1-color.r);
+  if(color.r > 0.45 && color.g > 0.45 && color.b < 0.6) {
+      color = vec4( color.r/30,color.g,color.b/2, color.a);
+	// color = vec4(1,0,0,1);
   }
+
+  if(color.r > 0.55 && color.g < 0.45 && color.b < 0.5) {
+      color = vec4(1-(color.r*color.r),color.g,.55, 1);
+	// color = vec4(1,0,0,1);
+  }
+
+  /*
   if (color.r < 0.6 && color.r > 0.4 && color.b < 0. && color.b > 0.3)
   {
 
@@ -186,7 +195,6 @@ void main(){
     color.g = color.b;
   }
   */
-
 	// Set the parameters of the sun rays
 	vec2 rayPos1 = vec2(WIDTH * 0.3, HEIGHT * -0.2);
 	vec2 rayRefDir1 = normalize(vec2(1.0, -0.116));
@@ -210,7 +218,7 @@ void main(){
 		vec4(1.0, 1.0, 1.0, 1.0) *
 		rayStrength(rayPos2, rayRefDir2, coord, raySeedA2, raySeedB2, raySpeed2);
 
-	gl_FragColor = rays1 * 0.5 + rays2 * 0.4;
+	gl_FragColor = rays1 * 0.3 + rays2 * 0.2;
 
 	// Attenuate brightness towards the bottom, simulating light-loss due to depth.
 	// Give the whole thing a blue-green tinge as well.
@@ -221,23 +229,16 @@ void main(){
 
 
 	gl_FragColor = ( gl_FragColor + color ) / 1.2;
-
-  if ( pos.x < 100 ) {
-    float alpha =  ((pos.x )/110);
-    if( gl_FragColor.a > alpha ) {
-      gl_FragColor.a = alpha;
-    }
-  }
- float amplitude = 1.;
-float frequency = 1.;
-float x = pos.x/166;
-float y = sin(x * frequency);
-float t = 0.01*(-iTime*130.0);
-y += sin(x*frequency*2.1 + t)*4.5;
-y += sin(x*frequency*1.72 + t*1.121)*4.0;
-y += sin(x*frequency*2.221 + t*0.437)*5.0;
-y += sin(x*frequency*3.1122+ t*4.269)*2.5;
-y *= amplitude*0.06;
+  float amplitude = 1.;
+  float frequency = 1.;
+  float x = pos.x / 166;
+  float y = sin(x * frequency);
+  float t = 0.01 * (-iTime * 130.0);
+  y += sin(x * frequency * 2.1 + t) * 4.5;
+  y += sin(x * frequency * 1.72 + t * 1.121) * 4.0;
+  y += sin(x * frequency * 2.221 + t * 0.437) * 5.0;
+  y += sin(x * frequency * 3.1122 + t * 4.269) * 2.5;
+  y *= amplitude * 0.06;
   float treshold =(y+11)*45;
   if ( pos.y > treshold ) {
     float alpha = 1 - ( pos.y - treshold )/190;
@@ -246,4 +247,37 @@ y *= amplitude*0.06;
     }
   }
 
+  y = pos.y / 166;
+  x = sin(y * frequency);
+  t = 0.01 * (-iTime * 130.0);
+  x += sin(y * frequency * 2.1 + t) * 4.5;
+  x += sin(y * frequency * 1.72 + t * 1.121) * 4.0;
+  x += sin(y * frequency * 2.221 + t * 0.437) * 5.0;
+  x += sin(y * frequency * 3.1122 + t * 4.269) * 2.5;
+  x *= amplitude * 0.06;
+  treshold =(x+11)*65;
+
+  if ( pos.x > treshold ) {
+    float alpha = 1 - ( pos.x - treshold )/190;
+    if( gl_FragColor.a > alpha ) {
+      gl_FragColor.a = alpha;
+    }
+  }
+
+  y = pos.y / 166;
+  x = sin(y * frequency);
+  t = 0.01 * (-iTime * 130.0);
+  x += sin(y * frequency * 2.1 + t) * 4.5;
+  x += sin(y * frequency * 1.72 + t * 1.121) * 4.0;
+  x += sin(y * frequency * 2.221 + t * 0.437) * 5.0;
+  x += sin(y * frequency * 3.1122 + t * 4.269) * 2.5;
+  x *= amplitude * 0.06;
+  treshold =(x+5)*45;
+
+  if ( pos.x < treshold ) {
+    float alpha = 1 - ( treshold - pos.x  )/190;
+    if( gl_FragColor.a > alpha ) {
+      gl_FragColor.a = alpha;
+    }
+  }
 }
